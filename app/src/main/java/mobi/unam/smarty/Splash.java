@@ -1,10 +1,14 @@
 package mobi.unam.smarty;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.WindowManager;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Splash extends ActionBarActivity {
@@ -37,5 +41,21 @@ public class Splash extends ActionBarActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        Timer timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent nextActivity = new Intent(getApplicationContext(), Smarty.class);
+                nextActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(nextActivity);
+                finish();
+            }
+        }, 1000);
     }
 }
