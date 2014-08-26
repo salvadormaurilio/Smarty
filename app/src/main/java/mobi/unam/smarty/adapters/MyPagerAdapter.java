@@ -30,6 +30,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter implements PagerSliding
 //	public CharSequence getPageTitle(int position) {
 //		return titulos.get(position);
 //	}
+
 	
 	@Override
 	public Fragment getItem(int arg0) {
