@@ -8,6 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="52dip"
         app:pstsIndicatorColor="@color/background_app"
+        app:pstsShouldExpand="true"
+        app:pstsTabSwitch="true"
+        app:pstsUnderlineHeight="4dp"
         />
 
     <android.support.v4.view.ViewPager

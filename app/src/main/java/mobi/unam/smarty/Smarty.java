@@ -3,13 +3,15 @@ package mobi.unam.smarty;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 import mobi.unam.smarty.adapters.MyPagerAdapter;
 import mobi.unam.smarty.fragments.FragmentMap;
+import mobi.unam.smarty.fragments.FragmentPrueba;
+import mobi.unam.smarty.fragments.FragmentRoutes;
+import mobi.unam.smarty.utilities.AccordionTransformer;
+import mobi.unam.smarty.utilities.StackTransformer;
 
 
 public class Smarty extends ActionBarActivity implements ViewPager.OnPageChangeListener {
@@ -29,11 +31,12 @@ public class Smarty extends ActionBarActivity implements ViewPager.OnPageChangeL
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
-        adapter.addFragment(new FragmentMap(), R.drawable.ubicaactivado);
-        adapter.addFragment(new FragmentMap(), R.drawable.viajaactivo);
-        adapter.addFragment(new FragmentMap(), R.drawable.rutasactivo);
+        adapter.addFragment(FragmentMap.newInstance(), R.drawable.selector_ubica);
+        adapter.addFragment(new FragmentPrueba(), R.drawable.selector_viaja);
+        adapter.addFragment(new FragmentRoutes(), R.drawable.selector_rutas);
 
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new StackTransformer());
         tabs.setViewPager(viewPager);
         tabs.setOnPageChangeListener(this);
     }
