@@ -1,15 +1,26 @@
 package mobi.unam.smarty.fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import mobi.unam.smarty.R;
 
@@ -19,6 +30,8 @@ import mobi.unam.smarty.R;
  */
 public class FragmentMap extends Fragment {
 
+
+    private List<Boolean> enableRoutes;
 
     public static final FragmentMap newInstance() {
         FragmentMap fragmentMap = new FragmentMap();
@@ -67,8 +80,12 @@ public class FragmentMap extends Fragment {
             mapa = mapView.getMap();
             mapa.setMyLocationEnabled(true);
 
-        }
+            enableRoutes = new ArrayList<Boolean>();
+            for (int i = 0; i < 13; i++) {
+                enableRoutes.add(false);
+            }
 
+        }
 
         return view;
     }
@@ -106,6 +123,38 @@ public class FragmentMap extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+
+
+    private class ObtenerMarkers extends AsyncTask<Void, Void, Boolean> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            BufferedReader reader = null;
+
+
+
+
+
+            reader = new BufferedReader(new InputStreamReader(getResources()
+                    .openRawResource(R.raw.estaciones)));
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+        }
+
     }
 
 }

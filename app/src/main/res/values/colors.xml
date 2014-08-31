@@ -4,5 +4,6 @@
     <color name="background_black_item">#4C4C4C</color>
     <color name="background_gray_item">#7A7A7A</color>
     <color name="background_blue_item">#00A9B0</color>
+    <color name="text_color_gray">#6A6A6A</color>
 
 </resources>

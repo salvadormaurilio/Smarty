@@ -2,27 +2,49 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/select_all"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:text="Seleccionar Todos"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/back_check_select_all"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/checkBoxAllRoutes"
+            android:text="Seleccionar Todos"
+            android:textColor="@color/text_color_gray"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <CheckBox
+            android:id="@+id/checkBoxAllRoutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/checkbox_select_all_routes" />
+
+    </RelativeLayout>
+
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/select_all"
         android:stretchColumns="*">
 
         <TableRow
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingTop="8dp">
 
             <CheckBox
                 android:id="@+id/checkBoxRoute1"
@@ -54,10 +76,10 @@
         </TableRow>
 
         <TableRow
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
             <CheckBox
                 android:id="@+id/checkBoxRoute5"
@@ -90,10 +112,10 @@
 
 
         <TableRow
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
             <CheckBox
                 android:id="@+id/checkBoxRoute9"
@@ -126,10 +148,10 @@
 
 
         <TableRow
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
             <CheckBox
                 android:id="@+id/checkBoxRoute12b"
@@ -140,4 +162,6 @@
 
         </TableRow>
     </TableLayout>
+
+
 </RelativeLayout>

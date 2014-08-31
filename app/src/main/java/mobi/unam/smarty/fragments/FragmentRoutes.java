@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import mobi.unam.smarty.R;
 
@@ -70,6 +70,9 @@ public class FragmentRoutes extends Fragment implements CompoundButton.OnChecked
         super.onActivityCreated(savedInstanceState);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARE_RUTAS, Context.MODE_PRIVATE);
+
+        CheckBox checkBoxAllRoutes = (CheckBox) view.findViewById(R.id.checkBoxAllRoutes);
+        checkBoxAllRoutes.setOnCheckedChangeListener(this);
 
         checkBoxRoute1 = (CheckBox) view.findViewById(R.id.checkBoxRoute1);
         checkBoxRoute1.setChecked(sharedPreferences.getBoolean(SHARE_ROUTE1, true));
@@ -130,61 +133,81 @@ public class FragmentRoutes extends Fragment implements CompoundButton.OnChecked
         SharedPreferences.Editor editor = getActivity().getSharedPreferences(SHARE_RUTAS, Context.MODE_PRIVATE).edit();
 
         switch (compoundButton.getId()) {
+
+            case R.id.checkBoxAllRoutes:
+                selectRoutes(b);
+                break;
             case R.id.checkBoxRoute1:
                 editor.putBoolean(SHARE_ROUTE1, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 1", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 1");
                 break;
             case R.id.checkBoxRoute2:
                 editor.putBoolean(SHARE_ROUTE2, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 2", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 2");
                 break;
             case R.id.checkBoxRoute3:
                 editor.putBoolean(SHARE_ROUTE3, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 3", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 3");
                 break;
             case R.id.checkBoxRoute4:
                 editor.putBoolean(SHARE_ROUTE4, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 4", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 4");
                 break;
             case R.id.checkBoxRoute5:
                 editor.putBoolean(SHARE_ROUTE5, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 5", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 5");
                 break;
             case R.id.checkBoxRoute6:
                 editor.putBoolean(SHARE_ROUTE6, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 6", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 6");
                 break;
             case R.id.checkBoxRoute7:
                 editor.putBoolean(SHARE_ROUTE7, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 7", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 7");
                 break;
             case R.id.checkBoxRoute8:
                 editor.putBoolean(SHARE_ROUTE8, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 8", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 8");
                 break;
             case R.id.checkBoxRoute9:
                 editor.putBoolean(SHARE_ROUTE9, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 9", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 9");
                 break;
             case R.id.checkBoxRoute10:
                 editor.putBoolean(SHARE_ROUTE10, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 10", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 10");
                 break;
             case R.id.checkBoxRoute11:
                 editor.putBoolean(SHARE_ROUTE11, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 11", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 11");
                 break;
             case R.id.checkBoxRoute12:
                 editor.putBoolean(SHARE_ROUTE12, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 12", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 12");
                 break;
             case R.id.checkBoxRoute12b:
                 editor.putBoolean(SHARE_ROUTE12b, compoundButton.isChecked());
-                Toast.makeText(getActivity(), "Ruta 12b", Toast.LENGTH_SHORT).show();
+                Log.d("FragmentRoutes", "Ruta 12b");
                 break;
         }
 
-        editor.commit();
+        editor.apply();
 
+    }
+
+    private void selectRoutes(boolean b) {
+        checkBoxRoute1.setChecked(b);
+        checkBoxRoute2.setChecked(b);
+        checkBoxRoute3.setChecked(b);
+        checkBoxRoute4.setChecked(b);
+        checkBoxRoute5.setChecked(b);
+        checkBoxRoute6.setChecked(b);
+        checkBoxRoute7.setChecked(b);
+        checkBoxRoute8.setChecked(b);
+        checkBoxRoute9.setChecked(b);
+        checkBoxRoute10.setChecked(b);
+        checkBoxRoute11.setChecked(b);
+        checkBoxRoute12.setChecked(b);
+        checkBoxRoute12b.setChecked(b);
     }
 }
