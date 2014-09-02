@@ -2,14 +2,14 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\res" >
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\res" >
             <file
                 name="background_tab"
-                path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\res\drawable\background_tab.xml"
+                path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\res\drawable\background_tab.xml"
                 qualifiers=""
                 type="drawable" />
             <file
-                path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\res\values\attrs.xml"
+                path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\res\values\attrs.xml"
                 qualifiers="" >
                 <declare-styleable name="PagerSlidingTabStrip" >
                     <attr
@@ -57,23 +57,23 @@
                 </declare-styleable>
             </file>
             <file
-                path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\res\values\colors.xml"
+                path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\res\values\colors.xml"
                 qualifiers="" >
+                <color name="background_tab_pressed" >#6633B5E5
+                </color>
                 <color name="activate_text_color" >#FF666666
                 </color>
                 <color name="transparent" >#00000000
-                </color>
-                <color name="background_tab_pressed" >#6633B5E5
                 </color>
                 <color name="deactivate_text_color" >#FFCCCCCC
                 </color>
             </file>
         </source>
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\build\generated\res\rs\release" />
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\build\generated\res\generated\release" />
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\build\generated\res\rs\release" />
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\build\generated\res\generated\release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\build-types\release\res" />
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\build-types\release\res" />
     </dataSet>
 
 </merger>

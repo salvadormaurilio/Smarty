@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\assets" />
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="C:\Users\salva_000\Documents\Proyecto Smarty\Smarty\library\build-types\release\assets" />
+        <source path="C:\Users\UNAM Mobile\Documents\Proyecto Smarty\Smarty\library\build-types\release\assets" />
     </dataSet>
 
 </merger>
