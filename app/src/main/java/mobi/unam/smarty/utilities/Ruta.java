@@ -10,19 +10,25 @@ import java.util.List;
 public class Ruta {
 
     @SerializedName("col")
-    List<Integer> colores;
+    private List<Integer> colores;
     @SerializedName("surOeste")
-    List<Double> surOeste;
+    private List<Double> surOeste;
     @SerializedName("nornotEste")
-    List<Double> notEste;
+    private List<Double> notEste;
     @SerializedName("polos")
-    List<Double> polilinea;
+    private List<Double> polilinea;
+
+    private int id;
 
     public Ruta(List<Integer> colores, List<Double> surOeste, List<Double> notEste, List<Double> polilinea) {
         this.colores = colores;
         this.surOeste = surOeste;
         this.notEste = notEste;
         this.polilinea = polilinea;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Integer> getColores() {
@@ -39,5 +45,9 @@ public class Ruta {
 
     public List<Double> getPolilinea() {
         return polilinea;
+    }
+
+    public int getId() {
+        return id;
     }
 }
