@@ -6,15 +6,18 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
@@ -34,27 +37,23 @@ import mobi.unam.smarty.utilities.Ruta;
  */
 public class FragmentMap extends Fragment {
 
+    private final static Double LATITUDE_INITIAL = 19.3222712;
+    private final static Double LONGITUDE_INITIAL = -99.1855799;
     private View view;
     private GoogleMap mapa;
     private MapView mapView;
-
     private List<Boolean> enableRoutes;
-
     private List<Polyline> polylines;
-
-
     private List<List<Double>> surOestes;
-    private List<List<Double>> notEstes;
-
-
-    public static final FragmentMap newInstance() {
-        FragmentMap fragmentMap = new FragmentMap();
-        return fragmentMap;
-    }
+    private List<List<Double>> norEstes;
 
     public FragmentMap() {
     }
 
+    public static FragmentMap newInstance() {
+        FragmentMap fragmentMap = new FragmentMap();
+        return fragmentMap;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,32 +84,38 @@ public class FragmentMap extends Fragment {
         }
 
 
+        return view;
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if (mapa == null) {
             mapa = mapView.getMap();
             mapa.setMyLocationEnabled(true);
 
             enableRoutes = new ArrayList<Boolean>();
             polylines = new ArrayList<Polyline>();
-            notEstes = new ArrayList<List<Double>>();
+            norEstes = new ArrayList<List<Double>>();
             surOestes = new ArrayList<List<Double>>();
+
             for (int i = 0; i < 13; i++) {
                 enableRoutes.add(false);
                 polylines.add(null);
-                notEstes.add(null);
+                norEstes.add(null);
                 surOestes.add(null);
             }
+            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.3222712, -99.1855799), 14));
 
+            new ObtenerMarkers(1).execute();
         }
-
-        return view;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
-
     }
 
     @Override
@@ -157,69 +162,68 @@ public class FragmentMap extends Fragment {
             Gson gson = new Gson();
             Ruta ruta;
             int idArchive = 0;
-            boolean isVisible = true;
+            boolean isVisible = false;
 
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(FragmentRoutes.SHARE_RUTAS, Context.MODE_PRIVATE);
             for (int i = 0; i < 13; i++) {
 
+                switch (i) {
+                    case 0:
+                        idArchive = R.raw.ruta_1;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE1, true);
+                        break;
+                    case 1:
+                        idArchive = R.raw.ruta_2;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE2, true);
+                        break;
+                    case 2:
+                        idArchive = R.raw.ruta_3;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE3, true);
+                        break;
+                    case 3:
+                        idArchive = R.raw.ruta_4;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE4, true);
+                        break;
+                    case 4:
+                        idArchive = R.raw.ruta_5;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE5, true);
+                        break;
+                    case 5:
+                        idArchive = R.raw.ruta_6;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE6, true);
+                        break;
+                    case 6:
+                        idArchive = R.raw.ruta_7;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE7, true);
+                        break;
+                    case 7:
+                        idArchive = R.raw.ruta_8;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE8, true);
+                        break;
+                    case 8:
+                        idArchive = R.raw.ruta_9;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE9, true);
+                        break;
+                    case 9:
+                        idArchive = R.raw.ruta_10;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE10, true);
+                        break;
+                    case 10:
+                        idArchive = R.raw.ruta_11;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE11, true);
+                        break;
+                    case 11:
+                        idArchive = R.raw.ruta_12a;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE12, true);
+                        break;
+                    case 12:
+                        idArchive = R.raw.ruta_12b;
+                        isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE12b, true);
+                        break;
+                }
 
                 if (!enableRoutes.get(i) && isVisible) {
-
-                    switch (i) {
-                        case 0:
-                            idArchive = R.raw.ruta_1;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE1, true);
-                            break;
-                        case 1:
-                            idArchive = R.raw.ruta_2;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE2, true);
-                            break;
-                        case 2:
-                            idArchive = R.raw.ruta_3;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE3, true);
-                            break;
-                        case 3:
-                            idArchive = R.raw.ruta_4;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE4, true);
-                            break;
-                        case 4:
-                            idArchive = R.raw.ruta_5;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE5, true);
-                            break;
-                        case 5:
-                            idArchive = R.raw.ruta_6;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE6, true);
-                            break;
-                        case 6:
-                            idArchive = R.raw.ruta_7;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE7, true);
-                            break;
-                        case 7:
-                            idArchive = R.raw.ruta_8;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE8, true);
-                            break;
-                        case 8:
-                            idArchive = R.raw.ruta_9;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE9, true);
-                            break;
-                        case 9:
-                            idArchive = R.raw.ruta_10;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE10, true);
-                            break;
-                        case 10:
-                            idArchive = R.raw.ruta_11;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE11, true);
-                            break;
-                        case 11:
-                            idArchive = R.raw.ruta_12a;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE12, true);
-                            break;
-                        case 12:
-                            idArchive = R.raw.ruta_12b;
-                            isVisible = sharedPreferences.getBoolean(FragmentRoutes.SHARE_ROUTE12b, true);
-                            break;
-                    }
-
+                    enableRoutes.set(i, true);
                     reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(idArchive)));
                     ruta = gson.fromJson(reader, Ruta.class);
                     ruta.setId(i);
@@ -227,10 +231,12 @@ public class FragmentMap extends Fragment {
 
                     if (surOestes.get(i) == null) {
                         surOestes.set(i, ruta.getSurOeste());
+
                     }
 
-                    if (notEstes.get(i) == null) {
-                        notEstes.set(i, ruta.getNotEste());
+                    if (norEstes.get(i) == null) {
+                        norEstes.set(i, ruta.getNotEste());
+
                     }
 
                     try {
@@ -241,13 +247,13 @@ public class FragmentMap extends Fragment {
                     }
 
                 } else if (enableRoutes.get(i) && !isVisible) {
+                    enableRoutes.set(i, false);
                     if (polylines.get(i) != null) {
                         polylines.get(i).remove();
                     }
                 }
 
             }
-
             return true;
         }
 
@@ -256,12 +262,12 @@ public class FragmentMap extends Fragment {
         protected void onProgressUpdate(Ruta... values) {
             super.onProgressUpdate(values);
 
-            if (values == null && values.length == 0) {
+            if (values == null || values.length == 0) {
                 return;
             }
             Ruta ruta = values[0];
             PolylineOptions polylineOptions = new PolylineOptions();
-            polylineOptions.color(Color.rgb(ruta.getColores().get(0), ruta.getColores().get(3), ruta.getColores().get(2)));
+            polylineOptions.color(Color.rgb(ruta.getColores().get(0), ruta.getColores().get(1), ruta.getColores().get(2)));
 
             List<Double> coordinates = ruta.getPolilinea();
 
@@ -278,32 +284,50 @@ public class FragmentMap extends Fragment {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
 
-            double surLatitude;
-            double surLongitude;
-            double norLatitude;
-            double norLongitude;
-
-
-
-
             if (aBoolean) {
+                double surLatitude = LATITUDE_INITIAL;
+                double norLatitude = LATITUDE_INITIAL;
+                double surLongitude = LONGITUDE_INITIAL;
+                double norLongitude = LONGITUDE_INITIAL;
 
-                for (List<Double> surOeste:surOestes)
+                List<Double> surOeste;
+                List<Double> norEste;
+                for (int i = 0; i < surOestes.size(); i++) {
+                    if (enableRoutes.get(i)) {
+                        surOeste = surOestes.get(i);
+                        norEste = norEstes.get(i);
+
+                        if (surLatitude > surOeste.get(0)) {
+                            surLatitude = surOeste.get(0);
+                        }
+                        if (surLongitude > surOeste.get(1)) {
+                            surLongitude = surOeste.get(1);
+                        }
+
+                        if (norLatitude < norEste.get(0)) {
+                            norLatitude = norEste.get(0);
+                        }
+                        if (norLongitude < norEste.get(1)) {
+                            norLongitude = norEste.get(1);
+                        }
+                    }
+                }
+
+
+                if (surLatitude != norLatitude)
                 {
-
+                    LatLng sur = new LatLng(surLatitude, surLongitude);
+                    LatLng nor = new LatLng(norLatitude, norLongitude);
+                    if (typeCamera == 1) {
+                        mapa.animateCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(sur, nor), 25));
+                    } else {
+                        mapa.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(sur, nor), 25));
+                    }
                 }
-
-                for (List<Double> norEste: notEstes)
+                else
                 {
-
+                    mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.3222712, -99.1855799), 14));
                 }
-
-                if (typeCamera == 1) {
-
-                } else {
-
-                }
-
             }
         }
     }

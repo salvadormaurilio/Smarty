@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="google_maps_key">AIzaSyBfe69rfBCKGogDn9_2xR2OQfJrPB3_TMA</string>
+    <string name="google_maps_key">AIzaSyCMF0SatrRjjRn1FFuwga-evWI0GrbgMq8</string>
 
     <string name="app_name">Smarty</string>
     <string name="hello_world">Hello world!</string>

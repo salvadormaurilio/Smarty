@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/UNAM%20Mobile/Documents/Proyecto%20Smarty/Smarty/library/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/salva_000/Documents/Proyecto%20Smarty/Smarty/library/res/values/colors.xml -->
     <eat-comment />
 
     <color name="activate_text_color">#FF666666</color>
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="deactivate_text_color">#FFCCCCCC</color>
     <color name="transparent">#00000000</color>
-    <!-- From: file:/C:/Users/UNAM%20Mobile/Documents/Proyecto%20Smarty/Smarty/library/res/values/attrs.xml -->
+    <!-- From: file:/C:/Users/salva_000/Documents/Proyecto%20Smarty/Smarty/library/res/values/attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="PagerSlidingTabStrip">

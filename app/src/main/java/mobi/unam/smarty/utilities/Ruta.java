@@ -13,7 +13,7 @@ public class Ruta {
     private List<Integer> colores;
     @SerializedName("surOeste")
     private List<Double> surOeste;
-    @SerializedName("nornotEste")
+    @SerializedName("notEste")
     private List<Double> notEste;
     @SerializedName("polos")
     private List<Double> polilinea;
